@@ -1,0 +1,15 @@
+migrations:
+  "20191202040522":
+    up:
+      type: sql
+      value: |
+        CREATE TABLE users (
+          id serial primary key,
+          name varchar not null,
+          email varchar not null,
+          password_hash varchar not null
+        );
+    down:
+      type: sql
+      value: |
+        DROP TABLE users;

@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  trek-dev:
+    image: registry.gitlab.com/snocorp/dbtrek:3.0.2
+    depends_on:
+      - postgres
+    volumes:
+      - "./db/migrate/:/migrate"
+    command: |
+      db migrate \
+        --dbconfig postgres://postgres:postgres@postgres:5432/goteam?sslmode=disable \
+        --migrations /migrate/migrations.yml
+  trek-test:
+    image: registry.gitlab.com/snocorp/dbtrek:3.0.2
+    depends_on:
+      - postgres
+    volumes:
+      - "./db/migrate/:/migrate"
+    command: |
+      db migrate \
+        --dbconfig postgres://postgres:postgres@postgres:5432/goteam_test?sslmode=disable
+        --migrations /migrate/migrations.yml
